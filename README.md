@@ -16,13 +16,13 @@ This repository contains **Terraform infrastructure-as-code (IaC)** for provisio
 
 Ensure the following tools are installed and configured:
 
-- **Terraform** `4.50.0`
-- **Azure CLI**
-- An active **Azure subscription**
+- Terraform `4.50.0`
+- Azure CLI
+- An active Azure subscription
 - Proper Azure permissions (Contributor or higher)
 
 ## Technology Stack
 
-- **Terraform**
-- **Microsoft Azure**
-- **Azure DevOps**
+- Terraform
+- Microsoft Azure
+- Azure DevOps
