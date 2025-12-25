@@ -1,19 +1,28 @@
-# terraform-ft-azure
-![Terraform](https://img.shields.io/badge/terraform-%235835CC.svg?style=for-the-badge&logo=terraform&logoColor=white)
-![Azure](https://img.shields.io/badge/azure-%230072C6.svg?style=for-the-badge&logo=microsoftazure&logoColor=white)
-![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)
-## Softwares
-- Terraform 3.68.0
-- Azure Devops
-- Python 3.10.x
-## Azure credential
-I refer to set environment variables for credential as the best way security.
+<div align="center">
+<h1>Pinwheel Infrastructure (Azure)</h1>
 
-```bash
-export ARM_CLIENT_ID=
-export ARM_CLIENT_SECRET=
-export ARM_SUBSCRIPTION_ID=
-export ARM_TENANT_ID=
-```
+This repository contains **Terraform infrastructure-as-code (IaC)** for provisioning, configuring, and managing **Microsoft Azure infrastructure**.
 
-## Set up on Azure DevOps
+[![Terraform Version](https://img.shields.io/badge/terraform-4.50.0-844FBA?logo=terraform&logoColor=white)](https://www.terraform.io)
+</div>
+
+## Purpose
+
+- Provision Azure infrastructure using Terraform
+- Support multiple environments (dev / staging / prod)
+- Integrate with CI/CD pipelines (Azure DevOps)
+
+## Prerequisites
+
+Ensure the following tools are installed and configured:
+
+- **Terraform** `4.50.0`
+- **Azure CLI**
+- An active **Azure subscription**
+- Proper Azure permissions (Contributor or higher)
+
+## Technology Stack
+
+- **Terraform**
+- **Microsoft Azure**
+- **Azure DevOps**
