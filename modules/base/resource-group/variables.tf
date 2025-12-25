@@ -5,12 +5,12 @@ variable "create" {
 }
 
 variable "name" {
-  description = "The name for the Azure Resource Group."
+  description = "The name of the resource group"
   type        = string
 }
 
 variable "location" {
-  description = "The Azure region where the Resource Group will be created."
+  description = "The location of the resource"
   type        = string
   default     = null
 }
