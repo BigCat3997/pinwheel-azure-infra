@@ -3,4 +3,3 @@ data "azurerm_resource_group" "existing" {
 
   name = var.name
 }
-
