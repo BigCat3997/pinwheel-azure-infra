@@ -1,15 +1,15 @@
+variable "location" {
+  description = "The location of the resource group"
+  type        = string
+}
+
 variable "resource_group_name" {
   description = "The name of the resource group"
   type        = string
 }
 
 variable "name" {
-  description = "The name of the apim"
-  type        = string
-}
-
-variable "location" {
-  description = "The location of the resource"
+  description = "The name of the API Management service"
   type        = string
 }
 
@@ -24,6 +24,6 @@ variable "publisher_email" {
 }
 
 variable "sku_name" {
-  description = "The SKU name of the apim"
+  description = "The SKU name for the API Management Service"
   type        = string
 }
