@@ -29,12 +29,6 @@ variable "sa_access_key" {
   sensitive   = true
 }
 
-variable "sku_name" {
-  description = "SKU name of the App Service Plan"
-  type        = string
-  default     = "B1"
-}
-
 variable "always_on" {
   description = "Enable Always On (ignored for Consumption plan)"
   type        = bool
