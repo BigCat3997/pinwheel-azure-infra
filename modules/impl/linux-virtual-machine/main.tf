@@ -51,9 +51,9 @@ module "local_nsg" {
   depends_on = [module.local_vnet]
 }
 
-module "local_virtual_machine_linux" {
+module "local_linux_virtual_machine" {
   for_each = { for index, config in var.vms : index => config }
-  source   = "../../base/virtual-machine-linux"
+  source   = "../../base/linux-virtual-machine"
 
   location                     = var.location
   resource_group_name          = module.local_resource_group.name
