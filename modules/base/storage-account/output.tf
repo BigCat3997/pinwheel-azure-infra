@@ -19,3 +19,13 @@ output "secondary_access_key" {
   value       = azurerm_storage_account.this.secondary_access_key
   sensitive   = true
 }
+
+output "blob_container_names" {
+  description = "list of blob container names created"
+  value       = keys(azurerm_storage_container.blobs)
+}
+
+output "file_share_names" {
+  description = "list of file share names created"
+  value       = keys(azurerm_storage_share.files)
+}

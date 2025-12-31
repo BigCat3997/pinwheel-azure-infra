@@ -1,6 +1,7 @@
 variable "location" {
   description = "The location of resource"
   type        = string
+  default     = null
 }
 
 variable "resource_group_name" {
@@ -22,13 +23,22 @@ variable "name" {
 variable "address_space" {
   description = "The address space for the virtual network, specified in CIDR notation"
   type        = list(string)
+  default     = null
 }
 
 variable "subnets" {
-  description = "List of subnets will be created"
+  description = "List of subnets with optional delegation"
   type = list(object({
     name          = string
     address_space = string
+
+    delegation = optional(object({
+      name = string
+      service_delegation = object({
+        name    = string
+        actions = list(string)
+      })
+    }))
   }))
-  default = []
+  default = null
 }

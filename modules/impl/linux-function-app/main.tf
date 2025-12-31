@@ -54,6 +54,39 @@ module "local_application_insights" {
   depends_on = [module.local_log_analytics_workspace]
 }
 
+module "local_vnet" {
+  source = "../../base/vnet"
+
+  create              = var.create_vnet
+  location            = var.location
+  resource_group_name = module.local_resource_group.name
+  name                = var.vnet_name
+  address_space       = var.vnet_address_space
+  subnets             = var.vnet_subnets
+}
+
+module "local_vnet_private_dns_zone" {
+  for_each = { for v in var.private_dns_zone_vnets : v.name => v }
+
+  source = "../../base/vnet"
+
+  create              = false
+  resource_group_name = each.value.resource_group_name
+  name                = each.value.name
+
+  depends_on = [module.local_vnet]
+}
+
+module "local_private_dns_zone" {
+  source = "../../base/private-dns-zone"
+
+  create              = var.create_pdz
+  location            = var.location
+  resource_group_name = module.local_resource_group.name
+  name                = var.pdz_name
+  vnet_ids            = local.private_dns_zone_vnet_ids
+}
+
 module "local_function_app_linux" {
   source = "../../base/linux-function-app"
 
@@ -75,6 +108,14 @@ module "local_function_app_linux" {
 
   monitor_diagnostic_setting_name = var.fa_monitor_diagnostic_setting_name
   workspace_id                    = module.local_log_analytics_workspace.id
+  enable_private_access           = var.enable_private_access
+  # vnet_id                         = module.local_vnet.id
+  private_endpoint_subnet_id = module.local_vnet.subnets[var.fa_subnet_name].id
+  private_dns_zone_id        = module.local_private_dns_zone.id
+
+
+  enable_vnet_outbound    = var.enable_vnet_outbound
+  vnet_outbound_subnet_id = module.local_vnet.subnets[var.fa_subnet_outbound_name].id
 
   depends_on = [module.local_storage_account, module.local_application_insights, module.local_app_service_plan]
 }
