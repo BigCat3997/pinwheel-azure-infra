@@ -126,3 +126,78 @@ variable "fa_runtime_version" {
 variable "fa_monitor_diagnostic_setting_name" {
   type = string
 }
+
+variable "enable_private_access" {
+  type    = bool
+  default = false
+}
+
+variable "create_vnet" {
+  description = "Create new one or use exist vnet"
+  type        = bool
+  default     = true
+}
+
+variable "vnet_name" {
+  description = "The name of the vnet"
+  type        = string
+}
+
+variable "vnet_address_space" {
+  description = "The address space for the virtual network, specified in CIDR notation"
+  type        = list(string)
+}
+
+variable "vnet_subnets" {
+  description = "List of subnets with optional delegation"
+  type = list(object({
+    name          = string
+    address_space = string
+
+    delegation = optional(object({
+      name = string
+      service_delegation = object({
+        name    = string
+        actions = list(string)
+      })
+    }))
+  }))
+}
+
+variable "fa_subnet_name" {
+  type = string
+}
+
+variable "fa_subnet_outbound_name" {
+  type = string
+}
+
+variable "private_dns_zone_vnets" {
+  type = list(object({
+    name                = string
+    resource_group_name = string
+  }))
+}
+
+variable "create_pdz" {
+  type    = bool
+  default = false
+}
+
+variable "pdz_name" {
+  description = "The name of the private dns zone"
+  type        = string
+}
+
+variable "enable_vnet_outbound" {
+  description = "Enable outbound VNet integration for Function App"
+  type        = bool
+  default     = false
+}
+
+variable "vnet_outbound_subnet_id" {
+  description = "Subnet ID for Function App outbound VNet integration"
+  type        = string
+  default     = null
+}
+
