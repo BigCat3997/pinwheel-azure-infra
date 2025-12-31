@@ -71,3 +71,28 @@ variable "workspace_id" {
   description = "Log Analytics Workspace ID"
   type        = string
 }
+
+variable "enable_private_access" {
+  type    = bool
+  default = false
+}
+
+variable "private_dns_zone_id" {
+  type = string
+}
+
+variable "private_endpoint_subnet_id" {
+  type = string
+}
+
+variable "enable_vnet_outbound" {
+  description = "Enable outbound VNet integration for Function App"
+  type        = bool
+  default     = false
+}
+
+variable "vnet_outbound_subnet_id" {
+  description = "Subnet ID for Function App outbound VNet integration"
+  type        = string
+  default     = null
+}
