@@ -39,7 +39,7 @@ module "local_private_dns_zone_blob" {
   location            = var.location
   resource_group_name = var.resource_group_name
   name                = var.private_dns_zone_blob_name
-  vnet_ids            = local.private_dns_zone_vnet_ids
+  linked_vnet_ids     = local.private_dns_zone_vnet_ids
 
   depends_on = [module.local_vnet_private_dns_zone]
 }
@@ -51,7 +51,7 @@ module "local_private_dns_zone_file" {
   location            = var.location
   resource_group_name = var.resource_group_name
   name                = var.private_dns_zone_file_name
-  vnet_ids            = local.private_dns_zone_vnet_ids
+  linked_vnet_ids            = local.private_dns_zone_vnet_ids
 
   depends_on = [module.local_vnet_private_dns_zone]
 }

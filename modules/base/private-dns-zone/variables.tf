@@ -19,7 +19,7 @@ variable "name" {
   type        = string
 }
 
-variable "vnet_ids" {
+variable "linked_vnet_ids" {
   description = "List of VNet IDs to link to the Private DNS zone"
   type        = list(string)
 }

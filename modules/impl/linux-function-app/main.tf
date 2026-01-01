@@ -84,7 +84,7 @@ module "local_private_dns_zone" {
   location            = var.location
   resource_group_name = module.local_resource_group.name
   name                = var.pdz_name
-  vnet_ids            = local.private_dns_zone_vnet_ids
+  linked_vnet_ids     = local.private_dns_zone_vnet_ids
 }
 
 module "local_function_app_linux" {
