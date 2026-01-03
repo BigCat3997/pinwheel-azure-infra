@@ -27,10 +27,6 @@ output "backend_pool_id" {
   value = azurerm_lb_backend_address_pool.this.id
 }
 
-output "probe_id" {
-  value = azurerm_lb_probe.this.id
-}
-
 output "public_ip" {
   value = try(azurerm_public_ip.this[0].ip_address, null)
 }
@@ -56,5 +52,13 @@ output "lb_outbound_rule_ids" {
   value = {
     for name, rule in azurerm_lb_outbound_rule.this :
     name => rule.id
+  }
+}
+
+output "lb_probe_ids" {
+  description = "Map of Load Balancer rule IDs keyed by name"
+  value = {
+    for name, probe in azurerm_lb_probe.this :
+    name => probe.id
   }
 }

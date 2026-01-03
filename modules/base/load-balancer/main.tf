@@ -37,10 +37,12 @@ resource "azurerm_network_interface_backend_address_pool_association" "this" {
 }
 
 resource "azurerm_lb_probe" "this" {
-  name            = var.lb_probe_name
+  for_each = { for p in var.lb_probes : p.name => p }
+
+  name            = each.value.name
   loadbalancer_id = azurerm_lb.this.id
-  protocol        = var.lb_protocol_tcp
-  port            = var.lb_http_port
+  protocol        = each.value.protocol
+  port            = each.value.port
 }
 
 resource "azurerm_lb_rule" "this" {
@@ -52,7 +54,7 @@ resource "azurerm_lb_rule" "this" {
   frontend_port                  = each.value.frontend_port
   backend_port                   = each.value.backend_port
   frontend_ip_configuration_name = each.value.frontend_ip_name
-  probe_id                       = azurerm_lb_probe.this.id
+  probe_id                       = azurerm_lb_probe.this[each.value.probe_name].id
   backend_address_pool_ids       = [azurerm_lb_backend_address_pool.this.id]
   disable_outbound_snat          = each.value.disable_outbound_snat
   tcp_reset_enabled              = each.value.tcp_reset_enabled

@@ -32,22 +32,14 @@ variable "lb_backend_pool_name" {
   type        = string
 }
 
-variable "lb_probe_name" {
-  description = "The name for the Load Balancer health probe."
-  type        = string
-  default     = "http-probe-80"
-}
-
-variable "lb_protocol_tcp" {
-  description = "The protocol used for the probe and rule (Tcp or Udp)."
-  type        = string
-  default     = "Tcp"
-}
-
-variable "lb_http_port" {
-  description = "The HTTP port number used by the probe and load balancing rule."
-  type        = number
-  default     = 80
+variable "lb_probes" {
+  description = "List of Load Balancer health probes"
+  type = list(object({
+    name     = string
+    protocol = string
+    port     = number
+  }))
+  default = []
 }
 
 variable "use_bep" {
@@ -77,14 +69,31 @@ variable "lb_frontend_ips" {
   default = []
 }
 
+# variable "lb_rules" {
+#   description = "List of Load Balancer rules"
+#   type = list(object({
+#     name                    = string
+#     protocol                = string
+#     frontend_port           = number
+#     backend_port            = number
+#     frontend_ip_name        = string
+#     disable_outbound_snat   = optional(bool, true)
+#     tcp_reset_enabled       = optional(bool, true)
+#     idle_timeout_in_minutes = optional(number, 30)
+#   }))
+#   default = []
+# }
+
 variable "lb_rules" {
-  description = "List of Load Balancer rules"
+  description = "List of LB rules"
   type = list(object({
-    name                    = string
-    protocol                = string
-    frontend_port           = number
-    backend_port            = number
-    frontend_ip_name        = string
+    name             = string
+    protocol         = string
+    frontend_port    = number
+    backend_port     = number
+    frontend_ip_name = string
+
+    probe_name              = string
     disable_outbound_snat   = optional(bool, true)
     tcp_reset_enabled       = optional(bool, true)
     idle_timeout_in_minutes = optional(number, 30)
